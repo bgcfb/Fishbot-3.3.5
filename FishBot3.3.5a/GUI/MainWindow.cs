@@ -78,13 +78,13 @@ namespace FishBot3._3._5a
         {
             try
             {
-                Log.Write("Attempting to connect to running WoW.exe process...", Color.Black);
+                Log.Write("正在查找 WoW.exe 进程...", Color.Black);
 
                 var proc = Process.GetProcessesByName("WoW").FirstOrDefault();
 
                 while (proc == null)
                 {
-                    var res = MessageBox.Show("Please open WoW, and login, and select your character before using the bot.", "FishBot", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                    var res = MessageBox.Show("没有找到游戏进程, 在使用前请打开游戏并且选择角色到达钓鱼地点.", "小猫钓鱼", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
 
                     if (res == DialogResult.Cancel)
                     {
@@ -99,7 +99,7 @@ namespace FishBot3._3._5a
                 wowHook.InstallHook();
                 lua = new Lua(wowHook);
 
-                Log.Write("Connected to process with ID = " + proc.Id, Color.Black);
+                Log.Write("查找到游戏进程, ID = " + proc.Id, Color.Black);
 
                 textBox1.Text = wowHook.Memory.ReadString(Offsets.PlayerName, Encoding.UTF8);
 
@@ -112,7 +112,7 @@ namespace FishBot3._3._5a
 
                 lua.DoString("zoneData = GetZoneText()");
                 // Thread.Sleep(100);
-                Log.Write("Zone: " + lua.GetLocalizedText("zoneData"), Color.Black);
+                Log.Write("地区: " + lua.GetLocalizedText("zoneData"), Color.Black);
 
                 var PlayerBase = new IntPtr(0x00CD87A8);
 
@@ -148,7 +148,7 @@ namespace FishBot3._3._5a
                 //    Idle = 0x13,
                 //}
 
-                Log.Write("Click 'Fish' to begin fishing.", Color.Green);
+                Log.Write("点击 '开始钓鱼' 按钮来启动.", Color.Green);
             }
             catch (Exception ex)
             {
@@ -180,8 +180,8 @@ namespace FishBot3._3._5a
 
                     if (!IsFishing)
                     {
-                        Log.Write("Fishing...", Color.Black);
-                        lua.CastSpellByName("Fishing");
+                        Log.Write("开始钓鱼...", Color.Black);
+                        lua.CastSpellByName("钓鱼");
                         Thread.Sleep(200); // Give the lure a chance to be placed in the water before we start scanning for it
                                            // 200 ms is a good length, most people play with under that latency
                     }
@@ -193,7 +193,7 @@ namespace FishBot3._3._5a
                         var type = wowHook.Memory.Read<int>(curObj + 0x14);
                         var cGUID = wowHook.Memory.Read<ulong>(curObj + 0x30);
 
-                        if (lastBobberGuid.Count == 5) // Only keep the last 5 bobber GUID's (explained below * )
+                        if (lastBobberGuid.Count == 50) // Only keep the last 5 bobber GUID's (explained below * )
                         {
                             lastBobberGuid.RemoveAt(0);
                             lastBobberGuid.TrimExcess();
@@ -209,7 +209,7 @@ namespace FishBot3._3._5a
                                 Encoding.UTF8, 50
                                 );
 
-                            if (objectName == "Fishing Bobber")
+                            if (objectName == "鱼漂")
                             {
                                 // /run for bag=0,4,1 do for slot=1,36,1 do local name=GetContainerItemLink(bag,slot);if (name and string.find(name,"Partially Rusted File")) then PickupContainerItem(bag,slot);DeleteCursorItem();end;end;end
 
@@ -220,7 +220,7 @@ namespace FishBot3._3._5a
                                     Caught++;
                                     textBox2.Text = Caught.ToString();
 
-                                    Log.Write("Caught something, hopefully a fish!", Color.Black);
+                                    Log.Write("钓到了什么, 希望是一条鱼吧!", Color.Black);
 
                                     // Check if we have inventory space for the fish, if not delete item "Partially Rusted File" which likes to waste space in bags
                                     //if (GetInventorySlotsLeft == 0)
@@ -230,21 +230,21 @@ namespace FishBot3._3._5a
 
                                     var MouseOverGUID = new IntPtr(0x00BD07A0);
                                     wowHook.Memory.Write(MouseOverGUID, cGUID);
-                                    Thread.Sleep(100);
+                                    Thread.Sleep(200);
 
                                     lua.DoString("InteractUnit(\'mouseover\')");
 
                                     lastBobberGuid.Add(cGUID);
 
-                                    Thread.Sleep(200);
+                                    Thread.Sleep(300);
 
                                     if (Caught == 10)
                                     {
                                         Log.Write("Dont worry this only happens @ 10 fish, i thought it would be a nice change", Color.Green);
 
-                                        lua.DoString("SendChatMessage(\"Tired of fishing... taking a nap for a while...\", \"EMOTE\", nil, \"General\")");
-                                        lua.DoString("DoEmote('sleep')");
-                                        Thread.Sleep(10000);
+                                        //lua.DoString("SendChatMessage(\"钓鱼累了... 休息一会儿...\", \"EMOTE\", nil, \"General\")");
+                                        //lua.DoString("DoEmote('sleep')");
+                                        //Thread.Sleep(10000);
                                         lua.DoString("JumpOrAscendStart()");
                                         Thread.Sleep(1000);
                                     }
@@ -350,6 +350,11 @@ namespace FishBot3._3._5a
                     // ignored
                 }
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

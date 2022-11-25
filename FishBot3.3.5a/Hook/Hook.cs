@@ -123,7 +123,7 @@ namespace FishBot3._3._5a
                     {
                         sBytes += b + ", ";
                     }
-                    Log.Write(Color.Gray, "Original EndSceneBytes = ({0})", sBytes);
+                    Log.Write(Color.Gray, "原始 EndSceneBytes = ({0})", sBytes);
 
                     // copy and save original instructions
                     Memory.WriteBytes(IntPtr.Add(_injectedCode, (int)sizeAsm), new[] { _endSceneOriginalBytes[5], _endSceneOriginalBytes[6] });
@@ -244,7 +244,7 @@ namespace FishBot3._3._5a
                 }
                 catch (Exception ex)
                 {
-                    if (!ex.Message.StartsWith("Could not read bytes from"))
+                    if (!ex.Message.StartsWith("无法读取内存地址"))
                     {
                         Log.Write(ex.ToString());
                     }

@@ -1,0 +1,12 @@
+D:\Fishbot-3.3.5\FishBot3.3.5a\bin\Debug\FishBot3.3.5a.exe.config
+D:\Fishbot-3.3.5\FishBot3.3.5a\bin\Debug\FishBot3.3.5a.exe
+D:\Fishbot-3.3.5\FishBot3.3.5a\bin\Debug\FishBot3.3.5a.pdb
+D:\Fishbot-3.3.5\FishBot3.3.5a\obj\Debug\FishBot3.3.5a.csproj.AssemblyReference.cache
+D:\Fishbot-3.3.5\FishBot3.3.5a\obj\Debug\FishBot3._3._5a.MainWindow.resources
+D:\Fishbot-3.3.5\FishBot3.3.5a\obj\Debug\FishBot3._3._5a.Properties.Resources.resources
+D:\Fishbot-3.3.5\FishBot3.3.5a\obj\Debug\FishBot3.3.5a.csproj.GenerateResource.cache
+D:\Fishbot-3.3.5\FishBot3.3.5a\obj\Debug\FishBot3.3.5a.csproj.CoreCompileInputs.cache
+D:\Fishbot-3.3.5\FishBot3.3.5a\obj\Debug\FishBot3.3.5a.csproj.Fody.CopyLocal.cache
+D:\Fishbot-3.3.5\FishBot3.3.5a\obj\Debug\FishBot3.3.5a.csproj.Fody.RuntimeCopyLocal.cache
+D:\Fishbot-3.3.5\FishBot3.3.5a\obj\Debug\FishBot3.3.5a.exe
+D:\Fishbot-3.3.5\FishBot3.3.5a\obj\Debug\FishBot3.3.5a.pdb
